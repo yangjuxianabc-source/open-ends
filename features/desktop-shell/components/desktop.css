@@ -1,0 +1,155 @@
+/* ===== Auxiliary desktop windows ===== */
+.desktop-mini {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 22px;
+  color: var(--oe-text);
+  background:
+    radial-gradient(circle at 92% 2%, rgba(195,139,62,.12), transparent 12rem),
+    linear-gradient(145deg, rgba(248,246,241,.9), rgba(231,228,220,.82));
+}
+.todo-panel { display: grid; grid-template-rows: auto minmax(0, 1fr); width: 100%; min-width: 0; min-height: 0; overflow: hidden; }
+.todo-panel-body { --scroll-feather: 14px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px 2px 14px 0; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--scroll-feather), #000 calc(100% - var(--scroll-feather)), transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 var(--scroll-feather), #000 calc(100% - var(--scroll-feather)), transparent 100%); }
+
+.window-frame.is-desktop .desktop-mini { flex: 1 1 auto; height: 100%; min-height: 0; }
+.window-frame-todo.is-desktop .window-content,.window-frame-spark.is-desktop .window-content{display:flex;min-height:0;height:100%;overflow:hidden}
+.desktop-mini-head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.desktop-mini-head h1 { margin: 4px 0 2px; font-size: 26px; font-weight: 600; }
+.desktop-mini-head p { max-width: 210px; margin: 0; color: var(--oe-text-muted); font-size: 11px; line-height: 1.55; }
+.todo-panel-heading { display: flex; align-items: baseline; flex: 1 1 auto; min-width: 0; padding-right: 34px; overflow: hidden; }
+.todo-panel-heading{display:flex;align-items:baseline;gap:9px}.todo-panel-heading time{color:var(--oe-text-muted);font-size:10px}
+.todo-panel-heading h1,.todo-panel-heading time { flex: 0 0 auto; white-space: nowrap; }
+.todo-pin-button {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--oe-border);
+  border-radius: 10px;
+  color: var(--oe-text-muted);
+  background: rgba(255,255,255,.08);
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+.todo-pin-button:hover { transform: translateY(-1px); color: var(--oe-text-strong); background: rgba(255,255,255,.14); }
+.todo-pin-button.is-pinned { border-color: rgba(195,139,62,.48); color: #f2c078; background: rgba(195,139,62,.2); }
+.todo-pin-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
+
+.mini-section { padding: 15px 0; border-top: 1px solid var(--oe-border); }
+.mini-task-list { display: grid; gap: 8px; margin-top: 9px; }
+.mini-task {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 10px 11px;
+  border: 1px solid rgba(54,54,48,.1);
+  border-radius: 13px;
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 6px 16px rgba(44,44,38,.035);
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.mini-task:hover { transform: translateX(2px); border-color: var(--oe-border-strong); background: rgba(255,255,255,.7); }
+.mini-task.task-done { background: rgba(220,230,223,.38); }
+.mini-task.task-done .mini-task-title { text-decoration: line-through; color: var(--oe-faint); }
+.mini-task-title { min-width: 0; padding: 2px 0; overflow-wrap: anywhere; border: 0; color: var(--oe-text); background: transparent; text-align: left; font-size: 12px; }
+.mini-task-title:hover { color: var(--oe-primary-deep); }
+.mini-empty { margin: 9px 0 0; color: var(--oe-text-muted); font-size: 11px; }
+.mini-add .quick-add { grid-template-columns: 1fr; gap: 8px; margin-top: 10px; }
+.mini-add .quick-add-fields { grid-template-columns: 1fr; }
+.mini-add .quick-add-domain { display: none; }
+.mini-add .primary-button { width: 100%; height: 42px; min-height: 42px; }
+
+/* Frameless auxiliary windows share the same warm graphite-and-amber visual
+ * language as MainWindow. TodoPanel stays slightly translucent so it still reads as a
+ * small floating utility over the desktop. */
+[data-edition="classic"] .window-frame-todo.is-desktop {
+  border-color: rgba(54,54,48,.13);
+  background: var(--oe-todo-window-surface,rgba(246,243,236,.95));
+  box-shadow: 0 24px 58px rgba(44,44,38,.16), inset 0 0 0 1px rgba(255,255,255,.42);
+  backdrop-filter: var(--oe-todo-window-backdrop,blur(24px) saturate(120%));
+}
+.window-frame-todo.is-desktop .desktop-titlebar {
+  border-bottom-color: rgba(54,54,48,.1);
+  background: rgba(251,250,246,.62);
+}
+.window-frame-todo.is-desktop .desktop-mini {
+  padding: 14px 16px 16px;
+  background: transparent;
+}
+.window-frame-todo.is-desktop .desktop-mini-head { align-items: center; margin-bottom: 12px; }
+.window-frame-todo.is-desktop .desktop-mini-head h1 { margin: 0; font-size: 20px; }
+.window-frame-todo.is-desktop .desktop-mini-head p { display: none; }
+.window-frame-todo.is-desktop .todo-pin-button { top: -2px; border-color: rgba(54,54,48,.14); color: var(--oe-text-muted); background: rgba(255,255,255,.32); }
+.window-frame-todo.is-desktop .todo-pin-button:hover { color: var(--oe-text-strong); background: rgba(255,255,255,.58); }
+.window-frame-todo.is-desktop .todo-pin-button.is-pinned { border-color: rgba(195,139,62,.52); color: var(--oe-primary-deep); background: rgba(195,139,62,.15); }
+.window-frame-todo.is-desktop .mini-task {
+  border-color: rgba(54,54,48,.1);
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 6px 16px rgba(44,44,38,.035);
+}
+.window-frame-todo.is-desktop .mini-task:hover { border-color: var(--oe-border-strong); background: rgba(255,255,255,.7); }
+.window-frame-todo.is-desktop .mini-task.task-done { background: rgba(220,230,223,.58); }
+.window-frame-todo.is-desktop .mini-add .field {
+  border-color: var(--oe-border);
+  color: var(--oe-text);
+  background: rgba(255,255,255,.62);
+}
+.window-frame-todo.is-desktop .mini-add .field::placeholder { color: var(--oe-text-faint); }
+.window-frame-todo.is-desktop .mini-add .primary-button { background: var(--oe-primary); }
+.window-frame-todo.is-desktop .mini-add .primary-button:hover { background: var(--oe-primary-deep); }
+.window-frame-todo.is-desktop .mini-empty { color: var(--oe-text-muted); }
+
+[data-edition="classic"] .window-frame-spark.is-desktop {
+  background: var(--oe-spark-window-surface,var(--oe-surface));
+  backdrop-filter: var(--oe-spark-window-backdrop,none);
+}
+.window-frame-spark.is-desktop .desktop-titlebar { background: rgba(251,250,246,.58); }
+.window-frame-spark.is-desktop .desktop-mini { background: transparent; }
+
+/* SparkCapture stays calm and compact inside the shared frameless chrome. */
+.spark-capture-shell { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; height: 100%; overflow: hidden; padding: 18px 20px 20px; }
+.spark-capture-intro { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 1px 12px; color: var(--oe-text-muted); font-size: 11px; }
+.spark-capture-intro>div{display:flex;align-items:baseline;gap:10px}.spark-capture-intro strong{color:var(--oe-text-strong);font-family:var(--oe-font-display);font-size:20px;font-weight:600}
+.spark-capture-intro .tiny-label { flex: none; }
+.spark-input {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  resize: none;
+  border: 1px solid var(--oe-border-strong);
+  border-radius: 17px;
+  padding: 16px;
+  outline: none;
+  color: var(--oe-text);
+  background: rgba(255,255,255,.72);
+  line-height: 1.75;
+  box-shadow: inset 0 1px 2px rgba(44,44,38,.025);
+}
+.spark-input:focus { border-color: rgba(95,120,107,.56); box-shadow: 0 0 0 3px var(--oe-focus-ring), inset 0 1px 2px rgba(44,44,38,.025); }
+.spark-capture-message { display: -webkit-box; flex: 0 0 auto; max-height: 4.8em; overflow: hidden; margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; color: var(--oe-text-strong); background: var(--oe-accent-soft); font-size: 11px; line-height: 1.6; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.capture-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 13px; }
+.capture-actions .btn { min-height: 38px; padding-inline: 14px; border-radius: 11px; font-size: 11px; }
+
+.desktop-toggle { display: flex; align-items: center; gap: 10px; margin: 18px 0; }
+.shortcut-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; }
+.desktop-settings-card .provider-warning { margin-top: 12px; }
+
+@media (max-width: 760px) {
+  .shortcut-form { grid-template-columns: 1fr; }
+  .desktop-mini { padding: 18px; }
+  .desktop-mini-head { flex-direction: column; }
+}

@@ -1,0 +1,33 @@
+[package]
+name = "open-ends"
+version = "1.0.0"
+description = "Open Ends local-first desktop application"
+authors = ["yangjuxianabc"]
+edition = "2021"
+
+[lib]
+name = "open_ends_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+aes-gcm = "0.10.3"
+dotenvy = "0.15.7"
+sha2 = "0.10.9"
+
+[dependencies]
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+aes-gcm = "0.10.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10.9"
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+tauri-plugin-single-instance = "2.4.3"
+tauri-plugin-global-shortcut = "2.3.2"
+tauri-plugin-window-state = "2.4.1"
+tauri-plugin-autostart = "2.5.1"
+windows = { version = "0.61.3", features = ["Win32_Foundation", "Win32_Graphics_Dwm", "Win32_Graphics_Gdi", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+keyring = { version = "3.6.3", features = ["windows-native"] }
+reqwest = { version = "0.13.4", default-features = false, features = ["json", "query", "rustls"] }

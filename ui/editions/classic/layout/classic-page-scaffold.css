@@ -1,0 +1,135 @@
+/* Classic's single page scroll boundary.  The lead and pinned rail are
+ * separate layout rows, so content never travels behind them. */
+[data-edition="classic"] .classic-page-scaffold {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--oe-page-canvas, transparent);
+}
+
+[data-edition="classic"] .classic-page-scaffold.has-pinned {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+[data-edition="classic"] .classic-page-lead-row,
+[data-edition="classic"] .classic-page-pinned-row {
+  width: min(1200px, 100%);
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: 34px;
+}
+
+[data-edition="classic"] .classic-page-lead-row {
+  padding-top: 30px;
+}
+
+[data-edition="classic"] .classic-page-pinned-row {
+  padding-top: var(--oe-page-lead-gap, 16px);
+}
+
+[data-edition="classic"] .classic-page-scroll {
+  --scroll-feather: 16px;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: 14px;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--scroll-feather), #000 calc(100% - var(--scroll-feather)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--scroll-feather), #000 calc(100% - var(--scroll-feather)), transparent 100%);
+}
+
+[data-edition="classic"] .classic-page-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+[data-edition="classic"] .classic-page-scroll-content {
+  width: min(1200px, 100%);
+  min-height: 100%;
+  margin-inline: auto;
+  padding: var(--oe-page-lead-gap, 16px) 34px 48px;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page-narrow {
+  width: min(860px, 100%);
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 100%);
+  max-width: none;
+  margin-inline: auto;
+  padding: var(--oe-page-lead-gap, 16px) 34px 48px;
+  animation: classicPageIn var(--oe-motion-slow) var(--oe-ease-emphasized) both;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page > .section:first-child {
+  margin-top: 0;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page-narrow {
+  max-width: 860px;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page.spark-page-scroll-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page.spark-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+[data-edition="classic"] .classic-page-scroll-content.page.spark-page-scroll-content + * {
+  min-height: 0;
+}
+
+@media (max-width: 1080px) {
+  [data-edition="classic"] .classic-page-lead-row,
+  [data-edition="classic"] .classic-page-pinned-row,
+  [data-edition="classic"] .classic-page-scroll-content {
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 780px) {
+  [data-edition="classic"] .classic-page-lead-row {
+    padding-top: 22px;
+  }
+
+  [data-edition="classic"] .classic-page-scroll-content {
+    padding-inline: 16px;
+    padding-bottom: 40px;
+  }
+
+  [data-edition="classic"] .classic-page-pinned-row {
+    padding-inline: 16px;
+    padding-top: 14px;
+  }
+
+  [data-edition="classic"] .classic-page-scroll-content.page {
+    padding-inline: 16px;
+  }
+
+  [data-edition="classic"] .classic-page-scroll-content.page.spark-page-scroll-content {
+    height: auto;
+    overflow: visible;
+  }
+
+  [data-edition="classic"] .classic-page-scroll-content.page.spark-page {
+    overflow: visible;
+  }
+}

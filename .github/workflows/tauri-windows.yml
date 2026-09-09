@@ -1,0 +1,38 @@
+name: Open Ends Windows Release Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - name: Validate Google Books release secret
+        shell: pwsh
+        env:
+          GOOGLE_BOOKS_API_KEY: ${{ secrets.GOOGLE_BOOKS_API_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:GOOGLE_BOOKS_API_KEY)) {
+            throw "GOOGLE_BOOKS_API_KEY is required for the Windows Release build."
+          }
+      - run: npm run tauri -- build
+        env:
+          GOOGLE_BOOKS_API_KEY: ${{ secrets.GOOGLE_BOOKS_API_KEY }}
+      - name: Upload Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-ends-windows-installers
+          if-no-files-found: error
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/msi/*.msi

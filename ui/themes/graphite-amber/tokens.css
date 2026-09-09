@@ -1,0 +1,89 @@
+[data-theme="graphite-amber"] {
+  --oe-bg: #e9e8e3;
+  --oe-bg-deep: #dcdad2;
+  --oe-surface: #fbfaf6;
+  --oe-surface-muted: #efede6;
+  --oe-surface-raised: #ffffff;
+  --oe-text: #252522;
+  --oe-text-strong: #1f2a25;
+  --oe-text-muted: #6c6a63;
+  --oe-text-faint: #99968e;
+  --oe-primary: #59605c;
+  --oe-primary-hover: #3f4541;
+  --oe-primary-soft: #e0e3e1;
+  --oe-accent: #c38b3e;
+  --oe-accent-soft: #f0e1c9;
+  --oe-danger: #9b5c52;
+  --oe-border: rgba(54,54,48,.12);
+  --oe-border-strong: rgba(54,54,48,.22);
+  --oe-shadow: 0 22px 64px rgba(44,44,38,.11);
+  --oe-shadow-soft: 0 10px 28px rgba(44,44,38,.075);
+  --oe-radius-xs: 7px;
+  --oe-radius-sm: 10px;
+  --oe-radius-md: 14px;
+  --oe-radius-lg: 18px;
+  --oe-radius-xl: 22px;
+  --oe-font-ui: "Inter", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --oe-font-display: "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --oe-font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --oe-motion-fast: .18s;
+  --oe-motion-normal: .26s;
+  --oe-motion-slow: .5s;
+  --oe-motion-micro: .14s;
+  --oe-motion-ui: .2s;
+  --oe-motion-layout: .24s;
+  --oe-ease-standard: ease;
+  --oe-ease-emphasized: cubic-bezier(.2,.8,.2,1);
+  --oe-main-window-canvas: #f4f2ed;
+  --oe-page-canvas: transparent;
+  --oe-page-lead-gap: 16px;
+  --oe-page-scroll-fade-height: 20px;
+  --oe-focus-surface: linear-gradient(135deg, rgba(255,250,241,.94), rgba(246,238,224,.84));
+  --oe-focus-surface-done: linear-gradient(135deg, rgba(234,238,229,.94), rgba(247,241,228,.86));
+  --oe-focus-border: color-mix(in srgb, var(--oe-accent) 16%, var(--oe-border));
+  --oe-titlebar-visual-height: 28px;
+  --oe-titlebar-hit-height: 34px;
+  --oe-todo-window-surface: rgba(246,243,236,.95);
+  --oe-todo-window-backdrop: blur(24px) saturate(120%);
+  --oe-spark-window-surface: #f4f1eb;
+  --oe-spark-window-backdrop: none;
+
+  /* Compatibility aliases for the existing feature CSS during the 1.0 transition. */
+  --oe-paper: rgba(250,249,245,.86);
+  --oe-paper-warm: #f3f1ec;
+  --oe-ink: var(--oe-text);
+  --oe-faint: var(--oe-text-faint);
+  --oe-ink-3: var(--oe-text-faint);
+  --oe-muted: var(--oe-surface-muted);
+  --oe-primary-deep: var(--oe-primary-hover);
+  --oe-reading: #69777a;
+  --oe-reading-soft: #e1e6e6;
+  --oe-open: #77716d;
+  --oe-open-soft: #e7e3de;
+  --oe-focus-ring: rgba(83,111,96,.2);
+  --font-ui: var(--oe-font-ui);
+  --font-serif: var(--oe-font-display);
+}
+
+[data-theme="graphite-amber"] body {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(195,139,62,.13), transparent 26rem),
+    radial-gradient(circle at 18% 94%, rgba(95,120,107,.13), transparent 32rem),
+    linear-gradient(135deg, #f4f3ef 0%, var(--oe-bg) 53%, #e7e0d7 100%);
+}
+
+[data-theme="graphite-amber"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+[data-theme="graphite-amber"] body {
+  color: var(--oe-text);
+  font-family: var(--oe-font-ui);
+}

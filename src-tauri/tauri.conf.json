@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Open Ends",
+  "version": "1.0.0",
+  "identifier": "io.github.yangjuxianabc.openends",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../out"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "未了 Open Ends",
+        "width": 1180,
+        "height": 780,
+        "minWidth": 1080,
+        "minHeight": 680,
+        "decorations": false,
+        "resizable": true,
+        "minimizable": true,
+        "maximizable": true,
+        "closable": true,
+        "transparent": true,
+        "shadow": false
+      },
+      {
+        "label": "todo-panel",
+        "title": "今天",
+        "url": "/todo-panel/",
+        "width": 360,
+        "height": 420,
+        "minWidth": 320,
+        "maxWidth": 520,
+        "minHeight": 300,
+        "visible": false,
+        "decorations": false,
+        "resizable": true,
+        "minimizable": false,
+        "maximizable": false,
+        "closable": false,
+        "transparent": true,
+        "shadow": false,
+        "skipTaskbar": true
+      },
+      {
+        "label": "spark-capture",
+        "title": "新建闪念",
+        "url": "/spark-capture/",
+        "width": 520,
+        "height": 300,
+        "minWidth": 380,
+        "minHeight": 240,
+        "visible": false,
+        "resizable": true,
+        "minimizable": false,
+        "maximizable": false,
+        "closable": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "skipTaskbar": true
+      }
+    ],
+    "security": { "csp": null }
+  },
+  "bundle": {
+    "active": true,
+    "publisher": "yangjuxianabc",
+    "targets": ["nsis", "msi"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

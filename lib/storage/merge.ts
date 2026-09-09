@@ -1,0 +1,18 @@
+import type {StoreData} from "./migrate";
+
+export interface MergeSummary{tasksAdded:number;taskEventsAdded:number;readingItemsAdded:number;readingEventsAdded:number;mediaItemsAdded:number;mediaEventsAdded:number;snapshotsAdded:number}
+export interface MergeResult{data:StoreData;summary:MergeSummary}
+type Temporal={updatedAt?:string;occurredAt?:string;generatedAt?:string;createdAt?:string;assignedAt?:string};
+type Timed=Temporal&{id:string};
+
+function timeOf(value:Temporal){const raw=value.updatedAt??value.generatedAt??value.occurredAt??value.assignedAt??value.createdAt;if(!raw)return 0;const parsed=Date.parse(raw);return Number.isNaN(parsed)?0:parsed}
+function mergeById<T extends Timed>(current:T[],incoming:T[]){const values=[...current];const indexes=new Map(values.map((item,index)=>[item.id,index]));let added=0;for(const item of incoming){const index=indexes.get(item.id);if(index===undefined){indexes.set(item.id,values.length);values.push(item);added++}else if(timeOf(item)>timeOf(values[index]))values[index]=item}return {values,added}}
+function mergeByKey<T extends Temporal>(current:T[],incoming:T[],key:(item:T)=>string){const values=[...current];const indexes=new Map(values.map((item,index)=>[key(item),index]));let added=0;for(const item of incoming){const value=key(item),index=indexes.get(value);if(index===undefined){indexes.set(value,values.length);values.push(item);added++}else if(timeOf(item)>timeOf(values[index]))values[index]=item}return {values,added}}
+
+export function mergeStores(current:StoreData,incoming:StoreData):MergeResult{
+  const tasks=mergeById(current.tasks,incoming.tasks);const taskEvents=mergeById(current.taskEvents,incoming.taskEvents);const dailyFocus=mergeByKey(current.dailyFocus,incoming.dailyFocus,item=>item.date);
+  const sparks=mergeById(current.sparks,incoming.sparks);const sparkRevisions=mergeByKey(current.sparkRevisions,incoming.sparkRevisions,item=>`${item.sparkId}:${item.revision}`);const sparkAnalysis=mergeById(current.sparkAnalysis,incoming.sparkAnalysis);const sparkLinks=mergeByKey(current.sparkLinks,incoming.sparkLinks,item=>`${item.targetType}:${item.targetId}`);
+  const readingItems=mergeById(current.readingItems,incoming.readingItems);const readingEvents=mergeById(current.readingEvents,incoming.readingEvents);const mediaItems=mergeById(current.mediaItems,incoming.mediaItems);const mediaEvents=mergeById(current.mediaEvents,incoming.mediaEvents);
+  const periodSnapshots=mergeByKey(current.periodSnapshots,incoming.periodSnapshots,item=>`${item.periodType}:${item.periodKey}:${item.revision}`);const aiReviews=mergeByKey(current.aiReviews,incoming.aiReviews,item=>`${item.snapshotId}:${item.revision}`);const profileSnapshots=mergeByKey(current.profileSnapshots,incoming.profileSnapshots,item=>`${item.evidenceEnd}:${item.revision}`);
+  return {data:{schemaVersion:Math.max(current.schemaVersion,incoming.schemaVersion),tasks:tasks.values,taskEvents:taskEvents.values,dailyFocus:dailyFocus.values,sparks:sparks.values,sparkRevisions:sparkRevisions.values,sparkAnalysis:sparkAnalysis.values,sparkLinks:sparkLinks.values,readingItems:readingItems.values,readingEvents:readingEvents.values,mediaItems:mediaItems.values,mediaEvents:mediaEvents.values,periodSnapshots:periodSnapshots.values,aiReviews:aiReviews.values,profileSnapshots:profileSnapshots.values,appSettings:{...incoming.appSettings,...current.appSettings}},summary:{tasksAdded:tasks.added,taskEventsAdded:taskEvents.added,readingItemsAdded:readingItems.added,readingEventsAdded:readingEvents.added,mediaItemsAdded:mediaItems.added,mediaEventsAdded:mediaEvents.added,snapshotsAdded:periodSnapshots.added}};
+}

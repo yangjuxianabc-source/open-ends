@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Open Ends desktop windows data access",
+  "windows": ["main", "todo-panel", "spark-capture"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    "sql:default",
+    "sql:allow-execute"
+  ]
+}

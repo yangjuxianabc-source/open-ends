@@ -1,0 +1,2 @@
+# SQL migration text is hashed by SQLx; keep the bytes stable across hosts.
+src-tauri/migrations/*.sql text eol=lf

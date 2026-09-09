@@ -1,0 +1,5 @@
+/*
+ * Classic shell layout moved to ui/editions/classic/classic.css.
+ * Keep this file as a compatibility marker for older imports; new Editions
+ * must not import layout.css or depend on the Classic shell DOM.
+ */

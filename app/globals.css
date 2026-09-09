@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* Presentation-neutral browser and accessibility baseline. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { min-height: 100%; }
+*, *::before, *::after { scrollbar-width: none; }
+*::-webkit-scrollbar { width: 0; height: 0; }
+
+html.tauri-window, html.tauri-window body { background: transparent; }
+html.tauri-window body { overflow: hidden; }
+html.tauri-window body::before { display: none; }
+
+body {
+  margin: 0;
+  color: var(--oe-text, currentColor);
+  font-family: var(--oe-font-ui, system-ui, sans-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button, input, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+::selection { background: var(--oe-accent-soft, Highlight); }
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--oe-primary, Highlight) 50%, transparent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
