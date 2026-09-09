@@ -82,11 +82,11 @@ Windows 10 / 11 x64。
 
 正式 GitHub Release 提供 Windows x64 安装包，推荐普通用户下载 NSIS 安装包：
 
-- [Open Ends_1.0.0_x64-setup.exe](https://github.com/yangjuxianabc-source/open-ends/releases/download/v1.0.0/Open%20Ends_1.0.0_x64-setup.exe)
+- [Open.Ends_1.0.0_x64-setup.exe](https://github.com/yangjuxianabc-source/open-ends/releases/download/v1.0.0/Open.Ends_1.0.0_x64-setup.exe)
 
 同时提供：
 
-- [Open Ends_1.0.0_x64_en-US.msi](https://github.com/yangjuxianabc-source/open-ends/releases/download/v1.0.0/Open%20Ends_1.0.0_x64_en-US.msi)
+- [Open.Ends_1.0.0_x64_en-US.msi](https://github.com/yangjuxianabc-source/open-ends/releases/download/v1.0.0/Open.Ends_1.0.0_x64_en-US.msi)
 
 > 当前 Windows 安装包尚未进行代码签名，首次安装时 SmartScreen 可能显示提醒。
 
